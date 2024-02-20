@@ -1,3 +1,4 @@
+import time
 from pprint import pprint
 
 import requests
@@ -7,10 +8,12 @@ headers = {
 }
 
 url = 'https://dvmn.org/api/long_polling/'
-
+current_timestamp = time.time()
 while True:
     try:
-        response = requests.get(url, headers=headers, timeout=5)
+        payload = {"timestamp": current_timestamp}
+        response = requests.get(url, headers=headers, timeout=5, params=payload)
+        current_timestamp = response.json()['last_attempt_timestamp']
     except requests.exceptions.ReadTimeout:
         continue
     except requests.exceptions.ConnectionError:
