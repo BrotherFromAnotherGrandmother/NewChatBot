@@ -9,7 +9,10 @@ headers = {
 url = 'https://dvmn.org/api/long_polling/'
 
 while True:
-    response = requests.get(url, headers=headers)
+    try:
+        response = requests.get(url, headers=headers, timeout=5)
+    except requests.exceptions.ReadTimeout:
+        continue
 
 
     print(response)
