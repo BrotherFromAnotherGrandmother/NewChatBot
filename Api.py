@@ -7,8 +7,11 @@ headers = {
 }
 
 url = 'https://dvmn.org/api/long_polling/'
-response = requests.get(url, headers=headers)
+
+while True:
+    response = requests.get(url, headers=headers)
 
 
-print(response)
-pprint(response.json())
+    print(response)
+    pprint(response.json())
+    print('')
