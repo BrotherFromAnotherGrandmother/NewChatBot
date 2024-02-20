@@ -13,6 +13,8 @@ while True:
         response = requests.get(url, headers=headers, timeout=5)
     except requests.exceptions.ReadTimeout:
         continue
+    except requests.exceptions.ConnectionError:
+        continue
 
 
     print(response)
