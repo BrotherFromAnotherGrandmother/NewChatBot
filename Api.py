@@ -2,7 +2,9 @@ import time
 from pprint import pprint
 
 import requests
+import telegram
 
+bot = telegram.Bot(token='6813297671:AAGyzgBHwpQGFy-jaIdAUy98OIsbArwms18')
 headers = {
     "Authorization": "Token 6ebf52cd576855857e60303b91c292a6cab40497"
 }
@@ -14,11 +16,11 @@ while True:
         payload = {"timestamp": current_timestamp}
         response = requests.get(url, headers=headers, timeout=5, params=payload)
         current_timestamp = response.json()['last_attempt_timestamp']
+        bot.send_message(chat_id=2131163741, text=f"Преподаватель проверил работу!")
     except requests.exceptions.ReadTimeout:
         continue
     except requests.exceptions.ConnectionError:
         continue
-
 
     print(response)
     pprint(response.json())
