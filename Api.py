@@ -1,12 +1,14 @@
 import time
 from pprint import pprint
-
 import requests
 import telegram
+from dotenv import load_dotenv
+load_dotenv()
+import os
 
-bot = telegram.Bot(token='6813297671:AAGyzgBHwpQGFy-jaIdAUy98OIsbArwms18')
+bot = telegram.Bot(token=os.environ['TELEGRAM_TOKEN'])
 headers = {
-    "Authorization": "Token 6ebf52cd576855857e60303b91c292a6cab40497"
+    "Authorization": f"Token {os.environ['DEVMAN_TOKEN']}"
 }
 
 url = 'https://dvmn.org/api/long_polling/'
