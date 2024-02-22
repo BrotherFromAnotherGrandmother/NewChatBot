@@ -20,7 +20,7 @@ while True:
         current_timestamp = response.json()['last_attempt_timestamp']
 
         if response.json()['new_attempts'][0]['is_negative'] == True:
-            bot.send_message(chat_id=2131163741, text=f'''
+            bot.send_message(chat_id=os.environ['CHAT_ID'], text=f'''
             Преподаватель проверил работу! {response.json()['new_attempts'][0]['lesson_title']}
             Ну ты внатуре не баклажан. И нихуя ты не кабан
             Непррррравильно, ёбаные волки!
