@@ -28,7 +28,7 @@ def main():
 
             current_timestamp = decoded_response['last_attempt_timestamp']
 
-            if decoded_response['new_attempts'][0]['is_negative'] == True:
+            if decoded_response['new_attempts'][0]['is_negative']:
                 bot.send_message(chat_id=os.environ['CHAT_ID'], text=f'''
                 Преподаватель проверил работу! {decoded_response['new_attempts'][0]['lesson_title']}
                 Ну ты внатуре не баклажан. И нихуя ты не кабан
