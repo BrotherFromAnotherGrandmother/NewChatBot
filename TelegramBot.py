@@ -19,7 +19,13 @@ def main():
     while True:
         try:
             payload = {"timestamp": current_timestamp}
+
             response = requests.get(url, headers=headers, timeout=5, params=payload)
+            response.raise_for_status()
+            decoded_response = response.json()
+            if 'error' in decoded_response:
+                raise requests.exceptions.HTTPError(decoded_response['error'])
+
             current_timestamp = response.json()['last_attempt_timestamp']
 
             if response.json()['new_attempts'][0]['is_negative'] == True:
