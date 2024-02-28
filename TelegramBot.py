@@ -32,14 +32,14 @@ def main():
             current_timestamp = decoded_response['last_attempt_timestamp']
 
             if decoded_response['new_attempts'][0]['is_negative']:
-                bot.send_message(chat_id=os.environ['CHAT_ID'], text=f'''
+                bot.send_message(chat_id=os.environ['TG_CHAT_ID'], text=f'''
                 Преподаватель проверил работу! {decoded_response['new_attempts'][0]['lesson_title']}
                 Ну ты внатуре не баклажан. И нихуя ты не кабан
                 Непррррравильно, ёбаные волки!
                 Ссылка на урок: {decoded_response['new_attempts'][0]['lesson_url']}
                 ''')
             else:
-                bot.send_message(chat_id=2131163741, text=f'''
+                bot.send_message(chat_id=os.environ['TG_CHAT_ID'], text=f'''
                 Преподаватель проверил работу! {decoded_response['new_attempts'][0]['lesson_title']}
                 Ты анакондовый Джанго! Всё правильно? Ну естеееесвенно!
                 Ссылка на урок: {decoded_response['new_attempts'][0]['lesson_url']}''')
