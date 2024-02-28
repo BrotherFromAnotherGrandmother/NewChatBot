@@ -21,7 +21,7 @@ git clone https://github.com/BrotherFromAnotherGrandmother/NewChatBot
 - Определите в нём переменные - `DEVMAN_TOKEN`, `TELEGRAM_TOKEN`, `CHAT_ID`
 
 - Python3 должен быть уже установлен. Затем используйте pip (или pip3, если есть конфликт с Python2) для установки зависимостей:
-
+- Используется версия python3.9
 ```
 pip install -r requirements.txt
 ```
