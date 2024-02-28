@@ -16,7 +16,10 @@ def main():
 
     url = 'https://dvmn.org/api/long_polling/'
     current_timestamp = time.time()
+
+    counter = 0
     while True:
+        counter += 1
         try:
             payload = {"timestamp": current_timestamp}
 
@@ -42,8 +45,14 @@ def main():
                 Ссылка на урок: {decoded_response['new_attempts'][0]['lesson_url']}''')
 
         except requests.exceptions.ReadTimeout:
+            if counter == 10:
+                time.sleep(120)
+                counter = 0
             continue
         except requests.exceptions.ConnectionError:
+            if counter == 10:
+                time.sleep(120)
+                counter = 0
             continue
 
         print(response)
