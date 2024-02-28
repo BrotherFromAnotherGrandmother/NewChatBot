@@ -55,10 +55,6 @@ def main():
                 counter = 0
             continue
 
-        print(response)
-        pprint(decoded_response)
-        print('')
-
 
 if __name__ == '__main__':
     main()
