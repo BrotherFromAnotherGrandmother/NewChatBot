@@ -26,20 +26,20 @@ def main():
             if 'error' in decoded_response:
                 raise requests.exceptions.HTTPError(decoded_response['error'])
 
-            current_timestamp = response.json()['last_attempt_timestamp']
+            current_timestamp = decoded_response['last_attempt_timestamp']
 
-            if response.json()['new_attempts'][0]['is_negative'] == True:
+            if decoded_response['new_attempts'][0]['is_negative'] == True:
                 bot.send_message(chat_id=os.environ['CHAT_ID'], text=f'''
-                Преподаватель проверил работу! {response.json()['new_attempts'][0]['lesson_title']}
+                Преподаватель проверил работу! {decoded_response['new_attempts'][0]['lesson_title']}
                 Ну ты внатуре не баклажан. И нихуя ты не кабан
                 Непррррравильно, ёбаные волки!
-                Ссылка на урок: {response.json()['new_attempts'][0]['lesson_url']}
+                Ссылка на урок: {decoded_response['new_attempts'][0]['lesson_url']}
                 ''')
             else:
                 bot.send_message(chat_id=2131163741, text=f'''
-                Преподаватель проверил работу! {response.json()['new_attempts'][0]['lesson_title']}
+                Преподаватель проверил работу! {decoded_response['new_attempts'][0]['lesson_title']}
                 Ты анакондовый Джанго! Всё правильно? Ну естеееесвенно!
-                Ссылка на урок: {response.json()['new_attempts'][0]['lesson_url']}''')
+                Ссылка на урок: {decoded_response['new_attempts'][0]['lesson_url']}''')
 
         except requests.exceptions.ReadTimeout:
             continue
@@ -47,7 +47,7 @@ def main():
             continue
 
         print(response)
-        pprint(response.json())
+        pprint(decoded_response)
         print('')
 
 
