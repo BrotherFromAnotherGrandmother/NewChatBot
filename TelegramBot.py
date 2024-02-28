@@ -20,7 +20,7 @@ def main():
         try:
             payload = {"timestamp": current_timestamp}
 
-            response = requests.get(url, headers=headers, timeout=5, params=payload)
+            response = requests.get(url, headers=headers, params=payload)
             response.raise_for_status()
             decoded_response = response.json()
             if 'error' in decoded_response:
