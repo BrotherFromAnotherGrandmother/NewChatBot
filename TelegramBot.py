@@ -1,14 +1,12 @@
 import time
-from pprint import pprint
 import requests
 import telegram
 from dotenv import load_dotenv
 import os
 
-load_dotenv()
-
 
 def main():
+    load_dotenv()
     bot = telegram.Bot(token=os.environ['TELEGRAM_TOKEN'])
     headers = {
         "Authorization": f"Token {os.environ['DEVMAN_TOKEN']}"
