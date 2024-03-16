@@ -23,24 +23,24 @@ def main():
 
             response = requests.get(url, headers=headers, params=payload)
             response.raise_for_status()
-            response_json = response.json()
-            if 'error' in response_json:
-                raise requests.exceptions.HTTPError(response_json['error'])
+            review_information = response.json()
+            if 'error' in review_information:
+                raise requests.exceptions.HTTPError(review_information['error'])
 
-            current_timestamp = response_json['last_attempt_timestamp']
+            current_timestamp = review_information['last_attempt_timestamp']
 
-            if response_json['new_attempts'][0]['is_negative']:
+            if review_information['new_attempts'][0]['is_negative']:
                 bot.send_message(chat_id=os.environ['TG_CHAT_ID'], text=f'''
-                Преподаватель проверил работу! {response_json['new_attempts'][0]['lesson_title']}
+                Преподаватель проверил работу! {review_information['new_attempts'][0]['lesson_title']}
                 Ну ты внатуре не баклажан. И нихуя ты не кабан
                 Непррррравильно, ёбаные волки!
-                Ссылка на урок: {response_json['new_attempts'][0]['lesson_url']}
+                Ссылка на урок: {review_information['new_attempts'][0]['lesson_url']}
                 ''')
             else:
                 bot.send_message(chat_id=os.environ['TG_CHAT_ID'], text=f'''
-                Преподаватель проверил работу! {response_json['new_attempts'][0]['lesson_title']}
+                Преподаватель проверил работу! {review_information['new_attempts'][0]['lesson_title']}
                 Ты анакондовый Джанго! Всё правильно? Ну естеееесвенно!
-                Ссылка на урок: {response_json['new_attempts'][0]['lesson_url']}''')
+                Ссылка на урок: {review_information['new_attempts'][0]['lesson_url']}''')
 
         except requests.exceptions.ReadTimeout:
             if counter_for_pause == 10:
