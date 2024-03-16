@@ -24,8 +24,7 @@ def main():
             response = requests.get(url, headers=headers, params=payload)
             response.raise_for_status()
             review_information = response.json()
-            if 'error' in review_information:
-                raise requests.exceptions.HTTPError(review_information['error'])
+
 
             current_timestamp = review_information['last_attempt_timestamp']
 
